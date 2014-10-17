@@ -1,3 +1,43 @@
 <h2>Main</h2>
 <hr>
-<p>点击左侧的链接。</p>
+
+<style type="text/css">
+    .hljs {
+        padding: 0;
+        background-color: transparent;
+    }
+</style>
+
+<h3><code>demo/frame.html</code></h3>
+<pre><code class="html">
+    <div class="container">
+        <div class="header">
+            <div bx-name="header"></div>    
+        </div>
+        <div class="content row">
+            <div class="col-xs-4" bx-name="sidebar"></div>
+            <div class="col-xs-8" id="main"></div>
+        </div>
+        <div class="footer">
+            <div bx-name="footer"></div>
+        </div>
+    </div>
+</code></pre>
+
+<h3><code>demo/header.html</code></h3>
+<pre><code class="html">
+    <div class="page-header">
+        <h1>
+            <a href="#">SPA Demo</a> 
+            <small>Brix Laoder Based</small>
+        </h1>
+    </div>
+</code></pre>
+
+<h3><code>demo/footer.html</code></h3>
+<pre><code class="html">
+    <div>
+        <hr>
+        <a href="http://github.com/nuysoft/brix-spa">GitHub</a>
+    </div>
+</code></pre>

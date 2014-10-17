@@ -2,9 +2,15 @@
 <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 <script src="../bower_components/requirejs/require.js"></script>
 <script src="../config.js"></script>
-<div id="container"></div>
+<div id="app"></div>
 <script>
     require(['spa'],function(spa){
-        spa.start()
+        window.spa = spa
+        spa.setup({
+            container : '#app',
+            frame : 'frame',
+            target : '#main',
+            view : 'main'
+        }).start()
     })
 </script>
