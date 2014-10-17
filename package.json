@@ -1,5 +1,5 @@
 {
-  "name": "brix-demo",
+  "name": "brix-spa",
   "version": "0.0.0",
   "devDependencies": {
     "gulp": "*",
