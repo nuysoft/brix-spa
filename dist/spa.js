@@ -1,60 +1,36 @@
+
 /* global define, location, console */
 /* jshint multistr:true */
 /*
     Router
         https://github.com/visionmedia/page.js
+            Micro client-side router inspired by the Express router
         https://github.com/flatiron/director
+            a tiny and isomorphic URL router for JavaScript
     URI
         https://github.com/medialize/URI.js
+            Javascript URL mutation library
+    
+    TODO
+        拦截和取消 Ajax 请求
  */
 define(
-    [
-        'jquery', 'underscore', 'director',
-        'loader'
+    'brix/spa',[
+        'jquery', 'underscore', 'director', 'URIjs/URI', 'page',
+        'brix/loader',
+        'URIjs/URI.fragmentQuery', 'URIjs/URI.fragmentURI'
     ],
     function(
-        $, _, Router,
+        $, _, Router, URI, Page,
         Loader
     ) {
-
-        var rhash = /#?!?([^?]*)\??(.*)?/
-        var r20 = /%20/g
-
-        var Util = {
-            // 解析 hash
-            parse: function(fragment) {
-                fragment = fragment || location.hash
-                var parts = rhash.exec(fragment)
-                return {
-                    path: parts[1],
-                    params: this.unparam(parts[2])
-                }
-            },
-            // 解析参数为 string
-            param: function(params) {
-                if (!params) return ''
-                var re = [];
-                _.each(params, function(value, key) {
-                    if (value === '') return
-                    re.push(encodeURIComponent(key) + "=" + encodeURIComponent(value))
-                })
-                return re.join("&").replace(r20, "+")
-            },
-            // 解析参数为 object
-            unparam: function(param) {
-                if (!param) return {}
-                if (_.isObject(param)) return param
-                var re = {};
-                for (var i = 0, arr = param.split('&'), kv;
-                    (kv = arr[i]); i++) {
-                    kv = kv.split('=');
-                    re[kv[0]] = kv[1];
-                }
-                return re;
-            }
-        }
-
         return {
+            // URL 路由
+            Router: Router,
+            // URL 操作库
+            URI: URI,
+            // URL 跳转
+            Page: Page,
             // 选项集 options
             options: {
                 // 1. 命名 TODO
@@ -87,9 +63,9 @@ define(
                     console.time(label)
                     console.group(label)
 
-                    var parts = Util.parse(fragment)
-                    var moduleId = parts.path || that.options.view
-                    var params = parts.params
+                    var furi = new URI(fragment)
+                    var moduleId = furi.path() || that.options.view
+                    var params = furi.query(true)
                     var target = params.target || that.options.target
                     console.log(moduleId, params)
 
@@ -105,13 +81,16 @@ define(
                 // TODO
                 return this
             },
+            /*
+                
+             */
             navigate: function(params) {
-                var parts = Util.parse()
-                _.extend(parts.params, Util.unparam(params))
-                params = Util.param(parts.params)
-                location.hash = '#' + parts.path + (params ? '?' + params : '')
-                return this
+                var uri = URI(location.href)
+                var furi = URI(uri.fragment())
+                furi.setSearch(params)
+                uri.fragment(furi.href())
+                Page(uri.href())
             }
         }
     }
-)
+);

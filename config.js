@@ -7,12 +7,15 @@ require.config({
         }
     },
     paths: {
-        loader: '/bower_components/brix-loader/dist/loader',
+        'brix/loader': '/bower_components/brix-loader/dist/loader',
+        'brix/spa': '/src/brix/spa',
+
         jquery: '/bower_components/jquery/dist/jquery',
         underscore: '/bower_components/underscore/underscore',
         director: '/bower_components/director/build/director',
-        highlightjs: '/bower_components/highlightjs/highlight.pack',
-        spa: '/src/spa'
+        URIjs: '/bower_components/uri.js/src/',
+        page: '/bower_components/page/page',
+        highlightjs: '/bower_components/highlightjs/highlight.pack'
     },
     shim: {
         director: {

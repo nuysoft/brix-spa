@@ -1,6 +1,6 @@
 define(
     [
-        'jquery', 'highlightjs', 'loader',
+        'jquery', 'highlightjs', 'brix/loader',
         'text!./main.html',
         'css!/bower_components/highlightjs/styles/github.css'
     ],

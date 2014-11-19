@@ -18,7 +18,9 @@
     "underscore": "~1.7.0",
     "director": "~1.2.2",
     "requirejs": "~2.1.15",
-    "requirejs-text": "~2.0.12"
+    "requirejs-text": "~2.0.12",
+    "uri.js": "~1.14.1",
+    "page": "visionmedia/page.js#~1.4.1"
   },
   "devDependencies": {
     "bootstrap": "~3.2.0",
