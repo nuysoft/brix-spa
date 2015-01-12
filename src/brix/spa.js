@@ -89,6 +89,11 @@ define(
                 furi.setSearch(params)
                 uri.fragment(furi.href())
                 Page(uri.href())
+            },
+            fragment: function() {
+                return URI(
+                    URI(location.href).fragment()
+                )
             }
         }
     }
