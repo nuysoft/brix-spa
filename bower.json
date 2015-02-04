@@ -4,6 +4,9 @@
   "authors": [
     "墨智 <mozhi.gyy@alibaba-inc.com>"
   ],
+  "main": [
+    "dist/spa.js"
+  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
