@@ -59,6 +59,9 @@ define(
                 })
 
                 function handle(fragment) {
+                    // https://github.com/flatiron/director/pull/264/files#diff-20711cb07e3243d3358513b78a0778a7R454
+                    fragment = location.hash.slice(1)
+
                     var label = '[route] ' + fragment
                     console.time(label)
                     console.group(label)
