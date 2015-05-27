@@ -30,8 +30,8 @@ define(
             URI: URI,
             // URL 跳转
             Page: Page,
-            // 选项集 options
-            options: {
+            // 选项集 settings
+            settings: {
                 // 1. 命名 TODO
                 // 2. target 和 view 是否必要？
                 container: '#app', // SPA 容器节点
@@ -39,10 +39,10 @@ define(
                 target: '#main', // 主内容区域
                 view: 'app/main' // 默认在主内容区域上加载的 View
             },
-            // 初始化选项集 options
-            setup: function(options) {
-                if (!options) return this.options
-                _.extend(this.options, options)
+            // 初始化选项集 settings
+            setup: function(settings) {
+                if (!settings) return this.settings
+                _.extend(this.settings, settings)
                 return this
             },
             // 启动路由监听
@@ -54,6 +54,8 @@ define(
                     var router = new Router()
                     router.on(/(.*)/, handle)
                     router.init()
+                    that.router = router
+
                     if (!location.hash) handle(that.options.view)
                 })
 
@@ -93,6 +95,10 @@ define(
                 uri.fragment(furi.href())
                 Page(uri.href())
             },
+            /*
+                SPA.fragment().query(true)
+                SPA.fragment().path()
+             */
             fragment: function() {
                 return URI(
                     URI(location.href).fragment()
