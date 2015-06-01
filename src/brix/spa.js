@@ -50,13 +50,13 @@ define(
                 var that = this
 
                 // 加载框架 View
-                Loader.load($(this.options.container), this.options.frame, {}, function() {
+                Loader.load($(this.settings.container), this.settings.frame, {}, function() {
                     var router = new Router()
                     router.on(/(.*)/, handle)
                     router.init()
                     that.router = router
 
-                    if (!location.hash) handle(that.options.view)
+                    if (!location.hash) handle(that.settings.view)
                 })
 
                 function handle(fragment) {
@@ -68,9 +68,9 @@ define(
                     console.group(label)
 
                     var furi = new URI(fragment)
-                    var moduleId = furi.path() || that.options.view
+                    var moduleId = furi.path() || that.settings.view
                     var params = furi.query(true)
-                    var target = params.target || that.options.target
+                    var target = params.target || that.settings.target
                     console.log(moduleId, params)
 
                     Loader.load($(target), moduleId, params, function() {
