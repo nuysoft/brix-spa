@@ -23,6 +23,9 @@ define(
         $, _, Router, URI, Page,
         Loader
     ) {
+
+        var DEBUG = ~location.search.indexOf('brix.spa.debug')
+
         return {
             // URL 路由
             Router: Router,
@@ -64,18 +67,22 @@ define(
                     fragment = location.hash.slice(1)
 
                     var label = '[route] ' + fragment
-                    console.time(label)
-                    console.group(label)
+                    if (DEBUG) {
+                        console.time(label)
+                        console.group(label)
+                    }
 
                     var furi = new URI(fragment)
                     var moduleId = furi.path() || that.settings.view
                     var params = furi.query(true)
                     var target = params.target || that.settings.target
-                    console.log(moduleId, params)
+                    if (DEBUG) console.log(moduleId, params)
 
                     Loader.load($(target), moduleId, params, function() {
-                        console.groupEnd(label)
-                        console.timeEnd(label)
+                        if (DEBUG) {
+                            console.groupEnd(label)
+                            console.timeEnd(label)
+                        }
                     })
                 }
 
