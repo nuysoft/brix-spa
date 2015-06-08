@@ -9,6 +9,7 @@ require.config({
     paths: {
         'brix/loader': '/bower_components/brix-loader/dist/loader',
         'brix/spa': '/dist/spa',
+        'brix/doom': '/dist/doom',
 
         jquery: '/bower_components/jquery/dist/jquery',
         underscore: '/bower_components/underscore/underscore',

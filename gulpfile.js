@@ -32,6 +32,13 @@ gulp.task('rjs', function() {
 	}
 	rjs(build)
 		.pipe(gulp.dest('.')) // pipe it to the output DIR
+
+	rjs({
+			baseUrl: 'src',
+			name: 'brix/doom',
+			out: 'dist/doom.js'
+		})
+		.pipe(gulp.dest('.')) // pipe it to the output DIR
 })
 
 // https://github.com/floatdrop/gulp-watch
