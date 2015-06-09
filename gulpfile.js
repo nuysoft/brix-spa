@@ -1,11 +1,13 @@
 /* global require */
 var gulp = require('gulp')
+var through = require('through2')
 var jshint = require('gulp-jshint')
 var rjs = require('gulp-requirejs')
+var uglify = require('gulp-uglify')
 var connect = require('gulp-connect')
 
 var globs = ['src/**/*.js', 'test/*.js', 'gulpfile.js']
-var watchTasks = ['jshint', 'rjs']
+var watchTasks = ['jshint', 'rjs', 'compress']
 
 // https://github.com/spenceralger/gulp-jshint
 gulp.task('jshint', function() {
@@ -39,6 +41,22 @@ gulp.task('rjs', function() {
 			out: 'dist/doom.js'
 		})
 		.pipe(gulp.dest('.')) // pipe it to the output DIR
+})
+
+// https://github.com/terinjokes/gulp-uglify
+gulp.task('compress', function() {
+    gulp.src(['dist/**.js','!dist/**-debug.js'])
+        .pipe(through.obj(function(file, encoding, callback) { /* jshint unused:false */
+            file.path = file.path.replace(
+                '.js',
+                '-debug.js'
+            )
+            callback(null, file)
+        }))
+        .pipe(gulp.dest('dist/'))
+    gulp.src(['dist/**.js','!dist/**-debug.js'])
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/'))
 })
 
 // https://github.com/floatdrop/gulp-watch
