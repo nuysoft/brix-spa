@@ -18,8 +18,10 @@ define(
         return {
             // 备选方法名 doom|ava
             manage: function(holder, ghost) {
+                if (!holder.on) return this
+
                 holder.on('destroy', function() {
-                    var by = ' by DOOM when it\'s holder is destroyed'
+                    var by = ' by DOOM because it\'s holder is destroying'
                     if (ghost.abort) ghost.abort(ghost, 'be canceled' + by, holder)
                     if (ghost.destroy) ghost.destroy(ghost, 'be destroyed' + by, holder)
                 })
