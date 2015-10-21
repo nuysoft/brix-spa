@@ -1,1 +1,1 @@
-define("brix/doom",[],function(){return{manage:function(e,o){return e.on("destroy",function(){var r=" by DOOM when it's holder is destroyed";o.abort&&o.abort(o,"be canceled"+r,e),o.destroy&&o.destroy(o,"be destroyed"+r,e)}),this}}});
+define("brix/doom",[],function(){return{manage:function(e,t){return e.on?(e.on("destroy",function(){var n=" by SPA.DOOM because it's holder is destroying";t.state&&"pending"===t.state()&&t.abort&&t.abort(t,"be canceled"+n,e),t.destroy&&t.destroy(t,"be destroyed"+n,e)}),this):this}}});

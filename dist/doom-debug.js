@@ -18,11 +18,25 @@ define(
     function() {
         return {
             // 备选方法名 doom|ava
+            /*
+                DOOM 
+             */
             manage: function(holder, ghost) {
+                if (!holder.on) return this
+
                 holder.on('destroy', function() {
-                    var by = ' by DOOM when it\'s holder is destroyed'
-                    if (ghost.abort) ghost.abort(ghost, 'be canceled' + by, holder)
-                    if (ghost.destroy) ghost.destroy(ghost, 'be destroyed' + by, holder)
+                    var by = ' by SPA.DOOM because it\'s holder is destroying'
+
+                    // Ajax
+                    if (ghost.state && (ghost.state() === 'pending') &&
+                        ghost.abort) {
+                        ghost.abort(ghost, 'be canceled' + by, holder)
+                    }
+
+                    // 实例
+                    if (ghost.destroy) {
+                        ghost.destroy(ghost, 'be destroyed' + by, holder)
+                    }
                 })
                 return this
             }
