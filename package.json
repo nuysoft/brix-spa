@@ -1,6 +1,16 @@
 {
   "name": "brix-spa",
   "version": "0.0.1",
+  "dependencies": {
+    "brix-loader": "master",
+    "jquery": "1.x.x",
+    "underscore": "*",
+    "director": "*",
+    "requirejs": "*",
+    "requirejs-text": "*",
+    "uri.js": "*",
+    "page": "visionmedia/page.js#~1.4.1"
+  },
   "devDependencies": {
     "gulp": "*",
     "gulp-connect": "*",
